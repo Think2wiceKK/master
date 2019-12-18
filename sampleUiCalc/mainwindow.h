@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLineEdit>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,7 +38,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
+    void setColor(QLineEdit *obj);
     void onClickFunctionalities(char oper);
 };
 #endif // MAINWINDOW_H
