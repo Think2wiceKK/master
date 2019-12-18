@@ -9,12 +9,17 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-#include <conio.h>
 #include "operations.h"
+#include <QPalette>
+#include <QChar>
+#include <QRegExp>
+#include <QRegularExpressionValidator>
 
 using namespace std;
 
 operations obj;
+
+//void setColor(QLineEdit *obj);
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +27,23 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("C@!cu!@t0r");
+
+    QLineEdit *le = ui->lineEditDisplay;
+    setColor(le);
+
+    //ui->lineEdit->setValidator(new QRegExpValidator(QRegExp("[0-9 +-*\]*"), ui->lineEdit));
+
+    ui->lineEdit->setPlaceholderText("Input");
+    ui->lineEditDisplay->setStyleSheet("QLineEdit { background: rgb(255, 255, 204); selection-background-color: rgb(233, 99, 0);}");
+}
+
+void MainWindow::setColor(QLineEdit *obj)
+{
+    QPalette palette;
+    palette.setColor(QPalette::Base, Qt::black);
+    palette.setColor(QPalette::Base, Qt::white);
+    //obj.setPalette(palette);
+    obj->setPalette(palette);
 }
 
 MainWindow::~MainWindow()
@@ -32,63 +54,76 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton1_clicked()
 {
     ui->lineEdit->insert("1");
+    ui->lineEditDisplay->insert("1");
 }
 
 void MainWindow::on_pushButton2_clicked()
 {
     ui->lineEdit->insert("2");
+    ui->lineEditDisplay->insert("2");
 }
 
 void MainWindow::on_pushButton3_clicked()
 {
     ui->lineEdit->insert("3");
+    ui->lineEditDisplay->insert("3");
 }
 
 void MainWindow::on_pushButton4_clicked()
 {
     ui->lineEdit->insert("4");
+    ui->lineEditDisplay->insert("4");
 }
 
 void MainWindow::on_pushButton5_clicked()
 {
     ui->lineEdit->insert("5");
+    ui->lineEditDisplay->insert("5");
 }
 
 void MainWindow::on_pushButton6_clicked()
 {
     ui->lineEdit->insert("6");
+    ui->lineEditDisplay->insert("6");
 }
 
 void MainWindow::on_pushButton7_clicked()
 {
     ui->lineEdit->insert("7");
+    ui->lineEditDisplay->insert("7");
 }
 
 void MainWindow::on_pushButton8_clicked()
 {
     ui->lineEdit->insert("8");
+    ui->lineEditDisplay->insert("8");
 }
 
 void MainWindow::on_pushButton9_clicked()
 {
     ui->lineEdit->insert("9");
+    ui->lineEditDisplay->insert("9");
 }
 
 void MainWindow::on_pushButton0_clicked()
 {
     ui->lineEdit->insert("0");
+    ui->lineEditDisplay->insert("");
 }
 
 
 void MainWindow::on_pushButtonClear_clicked()
 {
     ui->lineEdit->clear();
+    ui->lineEditDisplay->clear();
     obj.firstOperator = "";
     obj.secondOperator = "";
 }
 
 void MainWindow::onClickFunctionalities(char oper)
 {
+    QString ope = QChar(oper);
+    ui->lineEditDisplay->insert(ope);
     if(obj.firstOperator.empty())
     {
         obj.firstOperator = ui->lineEdit->text().toStdString();
@@ -112,25 +147,25 @@ void MainWindow::onClickFunctionalities(char oper)
 void MainWindow::on_pushButtonPlus_clicked()
 {
     onClickFunctionalities('+');
-    QMessageBox::information(this,"Entered Text",QString::fromStdString(obj.firstOperator));
+    //QMessageBox::information(this,"Entered Text",QString::fromStdString(obj.firstOperator));
 }
 
 void MainWindow::on_pushButtonMinus_clicked()
 {
     onClickFunctionalities('-');
-    QMessageBox::information(this,"Entered Text",QString::fromStdString(obj.firstOperator));
+    //QMessageBox::information(this,"Entered Text",QString::fromStdString(obj.firstOperator));
 }
 
 void MainWindow::on_pushButtonStar_clicked()
 {
     onClickFunctionalities('*');
-    QMessageBox::information(this,"Entered Text",QString::fromStdString(obj.firstOperator));
+    //QMessageBox::information(this,"Entered Text",QString::fromStdString(obj.firstOperator));
 }
 
 void MainWindow::on_pushButtonDiv_clicked()
 {
     onClickFunctionalities('/');
-    QMessageBox::information(this,"Entered Text",QString::fromStdString(obj.firstOperator));
+    //QMessageBox::information(this,"Entered Text",QString::fromStdString(obj.firstOperator));
 }
 
 void MainWindow::on_pushButtonEquals_clicked()
@@ -151,10 +186,9 @@ void MainWindow::on_pushButtonEquals_clicked()
         else
         {
             ui->lineEdit->setText(QString::fromStdString(res));
+            ui->lineEditDisplay->setText(QString::fromStdString(res));
         }
     }
-
     obj.firstOperator = "";
     obj.secondOperator = "";
-
 }
